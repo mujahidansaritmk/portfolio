@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aapka Naam - Web Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --purple: #6C5CE7;
+    --purple-light: #a29bfe;
+    --purple-faint: #f0eeff;
+    --teal: #00b894;
+    --teal-faint: #e0faf4;
+    --text: #1a1a2e;
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+    --bg: #ffffff;
+    --bg-secondary: #f9f9fc;
+    --radius: 12px;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: var(--purple); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; font-size: 14px; color: var(--text-muted); transition: color 0.2s; }
+  .nav-links a:hover { color: var(--purple); }
+
+  /* HERO */
+  .hero {
+    max-width: 860px; margin: 0 auto;
+    padding: 5rem 2rem 4rem;
+    display: flex; align-items: center; gap: 3rem;
+  }
+  .hero-avatar {
+    width: 120px; height: 120px; flex-shrink: 0; border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple-light), var(--teal));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 700; color: white;
+  }
+  .hero-text h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 36px; font-weight: 700; line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .hero-text h1 span { color: var(--purple); }
+  .hero-text p { font-size: 16px; color: var(--text-muted); max-width: 480px; margin-bottom: 1.25rem; }
+  .hero-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .badge {
+    font-size: 12px; padding: 4px 12px; border-radius: 20px;
+    background: var(--purple-faint); color: var(--purple); font-weight: 500;
+  }
+  .badge.green { background: var(--teal-faint); color: #007a62; }
+  .hero-btns { display: flex; gap: 12px; }
+  .btn-primary {
+    padding: 10px 22px; border-radius: var(--radius); border: none;
+    background: var(--purple); color: white; font-size: 14px; font-weight: 500;
+    cursor: pointer; text-decoration: none; display: inline-block; transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-outline {
+    padding: 10px 22px; border-radius: var(--radius);
+    border: 1.5px solid var(--border); background: white;
+    color: var(--text); font-size: 14px; font-weight: 500;
+    cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s;
+  }
+  .btn-outline:hover { background: var(--bg-secondary); }
+
+  /* SECTIONS */
+  section { max-width: 860px; margin: 0 auto; padding: 3rem 2rem; }
+  section + section { border-top: 1px solid var(--border); }
+  .section-label {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--purple); margin-bottom: 1.5rem;
+  }
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 26px; font-weight: 700; margin-bottom: 0.5rem;
+  }
+  .section-subtitle { font-size: 15px; color: var(--text-muted); margin-bottom: 2rem; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+  .skill-item {
+    background: var(--bg-secondary); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1rem;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .skill-icon { font-size: 24px; }
+  .skill-name { font-size: 14px; font-weight: 500; }
+  .skill-bar-bg { height: 4px; background: var(--border); border-radius: 2px; }
+  .skill-bar { height: 4px; border-radius: 2px; background: linear-gradient(90deg, var(--purple), var(--purple-light)); }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .proj-card {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.5rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .proj-card:hover { box-shadow: 0 8px 30px rgba(108,92,231,0.1); transform: translateY(-2px); }
+  .proj-number { font-size: 12px; font-weight: 600; color: var(--purple-light); margin-bottom: 0.5rem; }
+  .proj-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 0.5rem; }
+  .proj-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem; }
+  .proj-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1rem; }
+  .proj-tag { font-size: 11px; padding: 3px 8px; border-radius: 6px; background: var(--purple-faint); color: var(--purple); }
+  .proj-link { font-size: 13px; color: var(--purple); font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
+  .proj-link:hover { text-decoration: underline; }
+
+  /* SERVICES */
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .service-card {
+    background: var(--bg-secondary); border-radius: var(--radius);
+    border: 1px solid var(--border); padding: 1.5rem;
+  }
+  .service-icon { font-size: 28px; margin-bottom: 0.75rem; }
+  .service-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 0.5rem; }
+  .service-card p { font-size: 14px; color: var(--text-muted); }
+  .service-price { font-size: 13px; font-weight: 600; color: var(--teal); margin-top: 0.75rem; }
+
+  /* CONTACT */
+  .contact-box {
+    background: linear-gradient(135deg, var(--purple-faint), var(--teal-faint));
+    border-radius: 20px; padding: 3rem; text-align: center;
+  }
+  .contact-box h2 { font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 700; margin-bottom: 0.5rem; }
+  .contact-box p { color: var(--text-muted); font-size: 15px; margin-bottom: 2rem; }
+  .contact-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .contact-link {
+    display: flex; align-items: center; gap: 8px; padding: 10px 20px;
+    background: white; border: 1px solid var(--border); border-radius: var(--radius);
+    font-size: 14px; font-weight: 500; color: var(--text); text-decoration: none; transition: background 0.2s;
+  }
+  .contact-link:hover { background: var(--bg-secondary); }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 2rem;
+    font-size: 13px; color: var(--text-muted);
+    border-top: 1px solid var(--border);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .hero { flex-direction: column; gap: 1.5rem; padding: 3rem 1.5rem 2rem; }
+    .hero-text h1 { font-size: 26px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    nav { padding: 0 1.5rem; }
+    .nav-links { gap: 1rem; }
+    section { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">YN.dev</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-avatar">YN</div>
+  <div class="hero-text">
+    <h1>Yahan Aapka <span>Naam</span> Likhein</h1>
+    <p>Frontend Web Developer jo clean, fast aur responsive websites banata hai — HTML, CSS aur JavaScript ke saath.</p>
+    <div class="hero-badges">
+      <span class="badge green">✓ Available for Freelance</span>
+      <span class="badge">HTML / CSS / JS</span>
+      <span class="badge">2+ Years Experience</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">Mera Kaam Dekho</a>
+      <a href="#contact" class="btn-outline">Hire Karo</a>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">What I know</div>
+  <h2 class="section-title">Meri Skills</h2>
+  <p class="section-subtitle">In technologies mein main expert hoon</p>
+  <div class="skills-grid">
+    <div class="skill-item">
+      <div class="skill-icon">🌐</div>
+      <div class="skill-name">HTML5</div>
+      <div class="skill-bar-bg"><div class="skill-bar" style="width:95%"></div></div>
+    </div>
+    <div class="skill-item">
+      <div class="skill-icon">🎨</div>
+      <div class="skill-name">CSS3</div>
+      <div class="skill-bar-bg"><div class="skill-bar" style="width:90%"></div></div>
+    </div>
+    <div class="skill-item">
+      <div class="skill-icon">⚡</div>
+      <div class="skill-name">JavaScript</div>
+      <div class="skill-bar-bg"><div class="skill-bar" style="width:80%"></div></div>
+    </div>
+    <div class="skill-item">
+      <div class="skill-icon">📱</div>
+      <div class="skill-name">Responsive Design</div>
+      <div class="skill-bar-bg"><div class="skill-bar" style="width:92%"></div></div>
+    </div>
+    <div class="skill-item">
+      <div class="skill-icon">🔧</div>
+      <div class="skill-name">Git & GitHub</div>
+      <div class="skill-bar-bg"><div class="skill-bar" style="width:75%"></div></div>
+    </div>
+    <div class="skill-item">
+      <div class="skill-icon">✨</div>
+      <div class="skill-name">CSS Animations</div>
+      <div class="skill-bar-bg"><div class="skill-bar" style="width:85%"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">My work</div>
+  <h2 class="section-title">Projects</h2>
+  <p class="section-subtitle">Kuch kaam jo maine kiya hai — apne real projects yahan add karein</p>
+  <div class="projects-grid">
+    <div class="proj-card">
+      <div class="proj-number">01</div>
+      <h3>Restaurant Website</h3>
+      <p>Menu, photo gallery aur contact form ke saath ek fully responsive website.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">HTML</span>
+        <span class="proj-tag">CSS</span>
+        <span class="proj-tag">JavaScript</span>
+      </div>
+      <a href="#" class="proj-link">Live Demo →</a>
+    </div>
+    <div class="proj-card">
+      <div class="proj-number">02</div>
+      <h3>E-Commerce Landing Page</h3>
+      <p>Product listing page with filter, cart, aur smooth scroll animations.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">HTML</span>
+        <span class="proj-tag">CSS Grid</span>
+        <span class="proj-tag">JS</span>
+      </div>
+      <a href="#" class="proj-link">Live Demo →</a>
+    </div>
+    <div class="proj-card">
+      <div class="proj-number">03</div>
+      <h3>Personal Portfolio</h3>
+      <p>Clean aur modern portfolio site ek freelancer ke liye jo Fiverr pe kaam karta hai.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">HTML</span>
+        <span class="proj-tag">CSS</span>
+      </div>
+      <a href="#" class="proj-link">Live Demo →</a>
+    </div>
+    <div class="proj-card">
+      <div class="proj-number">04</div>
+      <h3>SaaS Landing Page</h3>
+      <p>High-converting landing page with hero section, features, pricing table aur CTA.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">HTML</span>
+        <span class="proj-tag">CSS</span>
+        <span class="proj-tag">Animation</span>
+      </div>
+      <a href="#" class="proj-link">Live Demo →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">What I offer</div>
+  <h2 class="section-title">Meri Services</h2>
+  <p class="section-subtitle">Yeh main Fiverr / Upwork pe offer karta hoon</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🖥️</div>
+      <h3>Landing Page</h3>
+      <p>Ek clean, fast aur mobile-friendly landing page jo convert kare.</p>
+      <div class="service-price">Starting ₹1,500</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏢</div>
+      <h3>Business Website</h3>
+      <p>3-5 page professional website aapke business ke liye.</p>
+      <div class="service-price">Starting ₹4,000</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🐛</div>
+      <h3>Bug Fixing</h3>
+      <p>Aapki existing website ke HTML/CSS/JS bugs fix karunga.</p>
+      <div class="service-price">Starting ₹500</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📧</div>
+      <h3>HTML Email Template</h3>
+      <p>Responsive email templates jo har email client mein sahi dikhein.</p>
+      <div class="service-price">Starting ₹1,000</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-box">
+    <h2>Kaam Shuru Karein? 🚀</h2>
+    <p>Apna project discuss karne ke liye mujhse contact karein. 24 ghante mein reply milegi.</p>
+    <div class="contact-links">
+      <a href="mailto:aapka@email.com" class="contact-link">📧 Email Karein</a>
+      <a href="https://wa.me/91XXXXXXXXXX" class="contact-link">💬 WhatsApp</a>
+      <a href="https://fiverr.com" class="contact-link">🟢 Fiverr Profile</a>
+      <a href="https://linkedin.com" class="contact-link">💼 LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Aapka Naam · Sabhi adhikar surakshit hain · Made with ❤️ in India</p>
+</footer>
+
+</body>
+</html>
